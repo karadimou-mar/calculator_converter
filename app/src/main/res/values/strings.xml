@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CalculatorConverter</string>
+    <string name="calculator">Calculator</string>
+    <string name="currency">Currency</string>
 </resources>
