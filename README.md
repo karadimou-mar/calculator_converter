@@ -1,2 +1,2 @@
 # calculator_converter
-A simple calculator application with ability of converting currency
+A simple android calculator application with ability of converting currency
