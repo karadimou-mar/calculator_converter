@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var hasError = false
+    var hasError: Boolean = false
+    var lastNumeric: Boolean = false // wether the last input is a number
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,30 @@ class MainActivity : AppCompatActivity() {
             textView.append((view as Button).text)
             Log.d("YCALCULATOR", "bUTTON PRESSED")
         }
+        lastNumeric = true
         //handling error
+    }
+
+    fun onDecimalClicked(view: View) {
+        if ((!(textView.text.toString()).contains(".", true)) && lastNumeric) {
+            textView.append((view as Button).text)
+            lastNumeric = true
+        }
+
+    }
+
+    fun onClear(view: View) {
+        textView.text = "0"
+        hasError = false
+        lastNumeric = false
+    }
+
+    fun onOperatorClicked(view: View) {
+        if (lastNumeric && !(textView.text.toString()).contains(".", true)) {
+            textView.append((view as Button).text)
+            lastNumeric = false
+
+        }
     }
 
 }
