@@ -9,7 +9,6 @@ import com.example.calculatorconverter.api.CurrencyAPIClient
 import com.example.calculatorconverter.model.Countries
 import com.example.calculatorconverter.model.Currency
 import com.example.calculatorconverter.model.Rates
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_currency.*
 import retrofit2.Call
 import retrofit2.Callback
