@@ -42,10 +42,11 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onDecimalClicked(view: View) {
-        if ((!(textView?.text.toString()).endsWith(".")) && lastNumeric) {
+        val list: List<String> = textView.text.split("[-+*/]".toRegex())
+        if (!(list.last().contains(".")) && lastNumeric) {
             textView.append((view as Button).text)
             lastNumeric = true
-            //TODO: operator cant be inserted when decimal point is already in
+
         }
 
     }

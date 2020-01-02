@@ -13,39 +13,60 @@ import kotlinx.android.synthetic.main.activity_currency.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.Field
 
 class CurrencyActivity : AppCompatActivity() {
+
+    val hashMap = hashMapOf(
+        "AUD" to 0.0,
+        "CAD" to 0.0,
+        "CNY" to 0.0,
+        "GBP" to 0.0,
+        "JPY" to 0.0,
+        "USD" to 0.0
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_currency)
 
-       //getRates()
+        getRates()
 
-      spinner.adapter = CountriesArrayAdapter(this,
-          listOf(
-              Countries(R.drawable.usd, "USA"),
-              Countries(R.drawable.cad, "CANADA"),
-              Countries(R.drawable.gbp, "GREAT BRITAIN"),
-              Countries(R.drawable.jpy, "JAPAN")
-          ))
+        spinner.adapter = CountriesArrayAdapter(
+            this,
+            listOf(
+
+                Countries(R.drawable.aud, "AUD"),
+                Countries(R.drawable.cad, "CAD"),
+                Countries(R.drawable.cny, "CNY"),
+                Countries(R.drawable.gbp, "GBP"),
+                Countries(R.drawable.jpy, "JPY"),
+                Countries(R.drawable.usd, "USD")
+            )
+        )
+
+
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 Log.d("TESTING", "LALALALALALLA")
-                getRates()
+                //getRates()
             }
 
         }
-}
+        //textView_currency.text = ""
 
-    private fun getRates(){
+
+
+    }
+
+    private fun getRates() {
         val call: Call<Currency> = CurrencyAPIClient.getLatest()
-        call.enqueue(object: Callback<Currency>{
+        call.enqueue(object : Callback<Currency> {
             override fun onFailure(call: Call<Currency>, t: Throwable) {
                 t.printStackTrace()
                 Log.e("FAILED CONNECTION", t.message)
@@ -54,8 +75,18 @@ class CurrencyActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Currency>, response: Response<Currency>) {
                 val response: Currency? = response.body()
                 val rates: Rates = response!!.rates
-                Log.d("RESPONSE", ""+rates.USD)
-                textView_currency.text = rates.USD.toString()
+                //Log.d("RESPONSE", "" + rates.USD)
+                //textView_currency.text = rates.USD.toString()
+                hashMap["AUD"] = rates.AUD
+                hashMap["CAD"] = rates.CAD
+                hashMap["CNY"] = rates.CNY
+                hashMap["GBP"] = rates.GBP
+                hashMap["JPY"] = rates.JPY
+                hashMap["USD"] = rates.USD
+
+                for (hash in hashMap){
+                    Log.d("RATES", ""+hash.value)
+                }
             }
 
         })

@@ -11,11 +11,50 @@
         android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="16dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_currency"
-        android:paddingTop="20dp"/>
+        android:layout_marginBottom="16dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/ic_currency" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="-53.5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_base"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/eur"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/textView_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:gravity="center_horizontal"
+            android:text="test"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dialog" />
 
     <TextView
         android:id="@+id/textView_currency"
@@ -24,18 +63,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
         android:text="TextView"
-        android:layout_below="@+id/imageView"/>
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_currency"
-        app:layout_constraintVertical_bias="0.053" />
+        android:textSize="30sp" />
 
 </LinearLayout>
