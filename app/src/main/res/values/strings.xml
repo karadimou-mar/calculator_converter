@@ -20,4 +20,16 @@
     <string name="decimal">.</string>
     <string name="ce">CE</string>
     <string name="ac">AC</string>
+
+    <string-array
+        name="currency_array">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
 </resources>

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "USD",
+    "url": "usd"
+  },
+  {
+    "name": "GBP",
+    "url": "gbp"
+  },
+  {
+    "name": "AUD",
+    "url": "aud"
+  },
+  {
+    "name": "CAD",
+    "url": "cad"
+  },
+  {
+    "name": "JPY",
+    "url": "jpy"
+  }
+]

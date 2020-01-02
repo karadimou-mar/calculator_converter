@@ -1,6 +1,7 @@
 package com.example.calculatorconverter
 
 
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +14,16 @@ class MainActivity : AppCompatActivity(){
 
     var hasError: Boolean = false
     var lastNumeric: Boolean = false // wether the last input is a number
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-
+        currency.setOnClickListener {
+            val intent = Intent(this, CurrencyActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onDecimalClicked(view: View) {
-        if ((!(textView?.text.toString()).contains(".", true)) && lastNumeric) {
+        if ((!(textView?.text.toString()).endsWith(".")) && lastNumeric) {
             textView.append((view as Button).text)
             lastNumeric = true
             //TODO: operator cant be inserted when decimal point is already in
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onClearAllClicked(view: View) {
-        textView?.text = "0"
+        textView?.text = ""
         hasError = false
         lastNumeric = false
     }
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onOperatorClicked(view: View) {
-        if (lastNumeric && !(textView?.text.toString()).contains(".", true)) {
+        if (lastNumeric ) {
             textView.append((view as Button).text)
             lastNumeric = false
 
