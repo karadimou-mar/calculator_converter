@@ -20,6 +20,7 @@
     <string name="decimal">.</string>
     <string name="ce">CE</string>
     <string name="ac">AC</string>
+    <string name="choose_currency">Choose currency</string>
 
     <string-array
         name="currency_array">

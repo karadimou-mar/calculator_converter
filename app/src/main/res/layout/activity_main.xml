@@ -18,7 +18,7 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textView_output"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -72,6 +72,10 @@
                     android:background="@color/rosy_brown"
                     android:paddingBottom="1dp"
                     android:textSize="20sp"
+                    android:drawableStart="@drawable/ic_money"
+                    android:gravity="center"
+                    android:paddingStart="38dp"
+                    android:paddingEnd="20dp"
                     android:textStyle="bold" />
 
                 <Button
