@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.Toast
 import com.example.calculatorconverter.network.CurrencyAPIClient
@@ -65,6 +66,7 @@ class CurrencyActivity : AppCompatActivity() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
+                parent?.selectedItemPosition
 
             }
 
@@ -84,13 +86,14 @@ class CurrencyActivity : AppCompatActivity() {
                         4 -> textView_currency.text = getResults(output, hashMap["JPY"])
                         5 -> textView_currency.text = getResults(output, hashMap["USD"])
                     }
-                    textView_date.visibility = View.VISIBLE
+                    //textView_date.visibility = View.VISIBLE
                 }
             }
 
         }
 
     }
+
 
     private fun getResults(amount: String?, rate: Double?): String {
         return if (amount!!.contains(".")) {
@@ -121,7 +124,7 @@ class CurrencyActivity : AppCompatActivity() {
                 hashMap["USD"] = rates.USD
 
                 val date = response.date
-                textView_date.text = getString(R.string.date, date)
+//                textView_date.text = getString(R.string.date, date)
 
                 check = 1
 
