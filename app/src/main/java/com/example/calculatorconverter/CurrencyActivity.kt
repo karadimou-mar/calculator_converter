@@ -87,9 +87,7 @@ class CurrencyActivity : AppCompatActivity() {
                 if (check == 1) {
                     Log.d("TESTING", "LALALALALALLA")
                     when (position) {
-                        0 -> textView_currency.text =
-                            if (flag) hashMap["AUD"]!!.times(output.toInt()).toString()
-                            else hashMap["AUD"]!!.times(output.toDouble()).toString()
+                        0 -> getResults(output,hashMap["AUD"])
 
                         1 -> textView_currency.text =
                             if (flag) hashMap["CAD"]!!.times(output.toInt()).toString()
@@ -120,6 +118,14 @@ class CurrencyActivity : AppCompatActivity() {
         //textView_currency.text = ""
 
 
+    }
+
+    private fun getResults(amount: String?, rate: Double? ): String{
+        return if (amount!!.contains(".")) {
+            rate!!.times(amount.toDouble()).toString()
+        } else {
+            rate!!.times(amount.toInt()).toString()
+        }
     }
 
     private fun getRates() {
