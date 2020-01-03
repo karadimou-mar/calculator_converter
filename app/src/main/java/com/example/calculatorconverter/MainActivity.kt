@@ -2,17 +2,14 @@ package com.example.calculatorconverter
 
 
 import android.content.Intent
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_currency.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     var hasError: Boolean = false
     var lastNumeric: Boolean = false // wether the last input is a number
@@ -69,7 +66,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onOperatorClicked(view: View) {
-        if (lastNumeric ) {
+        if (lastNumeric) {
             textView_output.append((view as Button).text)
             lastNumeric = false
 

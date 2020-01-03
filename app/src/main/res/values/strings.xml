@@ -22,15 +22,6 @@
     <string name="ac">AC</string>
     <string name="choose_currency">Choose currency</string>
 
-    <string-array
-        name="currency_array">
-        <item>Malaysia</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
-    </string-array>
+    <string name="date">Last updated: %s</string>
+    <string name="show_calendar">Show Calendar</string>
 </resources>
