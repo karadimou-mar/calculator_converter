@@ -48,16 +48,6 @@ class CurrencyActivity : AppCompatActivity() {
         val output = intent?.getStringExtra("Output")
         textView_amount.text = output
 
-        var flag: Boolean = false//is decimal
-
-        if (output!!.contains(".")) {
-            flag = false
-            Log.d("FLAG", "" + flag)
-        } else {
-            flag = true
-            Log.d("FLAG", "" + flag)
-        }
-
         spinner.adapter = CountriesArrayAdapter(
             this,
             listOf(
@@ -87,40 +77,22 @@ class CurrencyActivity : AppCompatActivity() {
                 if (check == 1) {
                     Log.d("TESTING", "LALALALALALLA")
                     when (position) {
-                        0 -> getResults(output,hashMap["AUD"])
-
-                        1 -> textView_currency.text =
-                            if (flag) hashMap["CAD"]!!.times(output.toInt()).toString()
-                            else hashMap["CAD"]!!.times(output.toDouble()).toString()
-
-                        2 -> textView_currency.text =
-                            if (flag) hashMap["CNY"]!!.times(output.toInt()).toString()
-                            else hashMap["CNY"]!!.times(output.toDouble()).toString()
-
-                        3 -> textView_currency.text =
-                            if (flag) hashMap["GBP"]!!.times(output.toInt()).toString()
-                            else hashMap["GBP"]!!.times(output.toDouble()).toString()
-
-                        4 -> textView_currency.text =
-                            if (flag) hashMap["JPY"]!!.times(output.toInt()).toString()
-                            else hashMap["JPY"]!!.times(output.toDouble()).toString()
-
-                        5 -> textView_currency.text =
-                            if (flag) hashMap["USD"]!!.times(output.toInt()).toString()
-                            else hashMap["USD"]!!.times(output.toDouble()).toString()
-
+                        0 -> textView_currency.text = getResults(output, hashMap["AUD"])
+                        1 -> textView_currency.text = getResults(output, hashMap["CAD"])
+                        2 -> textView_currency.text = getResults(output, hashMap["CNY"])
+                        3 -> textView_currency.text = getResults(output, hashMap["GBP"])
+                        4 -> textView_currency.text = getResults(output, hashMap["JPY"])
+                        5 -> textView_currency.text = getResults(output, hashMap["USD"])
                     }
                     textView_date.visibility = View.VISIBLE
                 }
             }
 
         }
-        //textView_currency.text = ""
-
 
     }
 
-    private fun getResults(amount: String?, rate: Double? ): String{
+    private fun getResults(amount: String?, rate: Double?): String {
         return if (amount!!.contains(".")) {
             rate!!.times(amount.toDouble()).toString()
         } else {
@@ -193,7 +165,7 @@ class CurrencyActivity : AppCompatActivity() {
 
                 val chosenCountry = map[spinner.selectedItemPosition]
                 getHistorical("$year-$monthOfYear-$dayOfMonth", chosenCountry!!)
-                Log.d("Chosen",chosenCountry)
+                Log.d("Chosen", chosenCountry)
 
 
 //                // Display Selected date in Toast
