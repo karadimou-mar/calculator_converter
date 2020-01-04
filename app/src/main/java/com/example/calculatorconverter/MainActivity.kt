@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val list: List<String> = textView_output.text.split(getString(R.string.operatorsRegex).toRegex())
         if (!(list.last().contains(".")) && lastNumeric) {
             textView_output.append((view as Button).text)
-            lastNumeric = true
+            lastNumeric = false
 
 
         }
@@ -72,10 +72,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClearLastClicked(view: View) {
-        val string: String = textView_output?.text.toString()
-        textView_output?.text = string.dropLast(1)
+        val text: String = textView_output?.text.toString()
+        val last: Char = text.toCharArray()[text.length-2]
+        textView_output?.text = text.dropLast(1)
         hasClearLast = true
-        lastNumeric = false
+        lastNumeric = last.isDigit()
     }
 
     fun onOperatorClicked(view: View) {

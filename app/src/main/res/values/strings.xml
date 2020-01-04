@@ -23,10 +23,9 @@
     <string name="choose_currency">Choose currency</string>
 
     <string name="date">Last updated: %s</string>
-    <string name="show_calendar">Calendar</string>
+    <string name="show_calendar">Show passed\nrates</string>
     <string name="eur">EUR</string>
     <string name="on_s_rate_was">On %s rate was: %f</string>
     <string name="now_rate_is_s">Now rate is: %f</string>
-    <string name="for_passed_rate_pick_a_day">For passed rate pick a day</string>
     <string name="operatorsRegex">[-+*/]</string>
 </resources>
