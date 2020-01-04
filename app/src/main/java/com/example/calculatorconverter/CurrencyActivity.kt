@@ -37,7 +37,7 @@ class CurrencyActivity : AppCompatActivity() {
         "USD" to 0.0
     )
 
-    val map = mapOf(0 to "AUD", 1 to "CAD", 2 to "CNY", 3 to "GBP", 4 to "JPY", 5 to "USD")
+    private val map: Map<Int, String> = mapOf(0 to "AUD", 1 to "CAD", 2 to "CNY", 3 to "GBP", 4 to "JPY", 5 to "USD")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class CurrencyActivity : AppCompatActivity() {
 
         getRates()
 
-        val actionBar = supportActionBar
+            val actionBar = supportActionBar
         actionBar!!.title = "Currency Activity"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
@@ -91,8 +91,8 @@ class CurrencyActivity : AppCompatActivity() {
                         5 -> textView_currency.text = getResults(output, hashMap["USD"])
                     }
 
-                    textView_passed.visibility = View.GONE
-                    textView_current.visibility = View.GONE
+                    textView_passed_date.visibility = View.GONE
+                    textView_passed_rate.visibility = View.GONE
 
                 }
             }
@@ -201,20 +201,15 @@ class CurrencyActivity : AppCompatActivity() {
 
                 val handler = Handler()
                 handler.postDelayed({
-                    textView_passed.visibility = View.VISIBLE
+                    textView_passed_date.visibility = View.VISIBLE
+                    textView_passed_rate.visibility = View.VISIBLE
                     val input = history?.getHistoricalRate(chosenCountry).toString()+"*"+textView_amount.text
                     val expression = ExpressionBuilder(input).build()
-                    textView_passed.text = expression.evaluate().toString()
-//                        getString(
-//                        R.string.on_s_rate_was, chosenDatePickerDialog,
-//                        history?.getHistoricalRate(chosenCountry)
-//                    )
-
-                    textView_current.visibility = View.VISIBLE
-                    textView_current.text =
-                        getString(R.string.now_rate_is_s, hashMap[chosenCountry])
-
-                    Log.d("Chosen", chosenCountry)
+                    //textView_passed.text = expression.evaluate().toString()
+                    textView_passed_date.text =
+                        getString(
+                        R.string.on_s_rate_was, chosenDatePickerDialog)
+                    textView_passed_rate.text = "${expression.evaluate()}"
                 }, 1000)
             },
             year,

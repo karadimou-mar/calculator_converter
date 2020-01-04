@@ -87,7 +87,7 @@
             android:text="@string/show_calendar" />
 
         <TextView
-            android:id="@+id/textView_passed"
+            android:id="@+id/textView_passed_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -98,7 +98,7 @@
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/textView_current"
+            android:id="@+id/textView_passed_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
