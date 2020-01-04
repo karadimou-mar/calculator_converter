@@ -13,8 +13,8 @@ interface CurrencyAPI {
         @Query("symbols") symbols: String = "USD,AUD,CAD,JPY,GBP"): Call<Currency>
 
     @GET("{date}")
-    fun getHistorical(
+     fun getHistorical(
         @Path("date") date: String,
         @Query("access_key") accessKey: String,
-        @Query("symbols") symbols: String) : Call<Currency>
+        @Query("symbols") symbols: String = "USD,AUD,CAD,JPY,GBP") : Call<Currency>
 }

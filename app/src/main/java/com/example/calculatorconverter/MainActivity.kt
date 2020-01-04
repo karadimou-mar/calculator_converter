@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         currency.setOnClickListener {
 
-            val output = textView_output.text.toString()
-
+            val output = textView_output.text.toString()   //+"\u20AC"
+            
             val intent = Intent(this, CurrencyActivity::class.java)
             intent.putExtra("Output", output)
             startActivity(intent)

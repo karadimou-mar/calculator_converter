@@ -1,122 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".CurrencyActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:paddingTop="20dp"
-        android:src="@drawable/ic_currency" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="20dp"
+            android:src="@drawable/ic_currency" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="-53.5dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="-53.5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView_base"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:src="@drawable/eur"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="1dp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_base"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:src="@drawable/eur"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp" />
 
-        <TextView
-            android:id="@+id/textView_eur"
+            <TextView
+                android:id="@+id/textView_eur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingStart="10dp"
+                android:text="@string/eur"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:gravity="center_horizontal"
-            android:text="@string/eur"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:spinnerMode="dialog" />
+
+        <TextView
+            android:id="@+id/textView_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/choose_currency"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
 
+        <TextView
+            android:id="@+id/textView_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="@string/for_passed_rate_pick_a_day"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible" />
 
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:spinnerMode="dialog" />
+        <Button
+            android:id="@+id/button_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="14dp"
+            android:onClick="onClickDataPicker"
+            android:text="@string/show_calendar" />
 
-    <TextView
-        android:id="@+id/textView_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:hint="@string/choose_currency"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView_passed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/textView_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="646466464"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-
-    <TextView
-        android:id="@+id/textView_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="For passed rate pick a day"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-    <Button
-        android:id="@+id/button_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/show_calendar"
-        android:onClick="onClickDataPicker"/>
-
-    <TextView
-        android:id="@+id/textView_passed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-
+        <TextView
+            android:id="@+id/textView_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible" />
 </LinearLayout>
+</ScrollView>

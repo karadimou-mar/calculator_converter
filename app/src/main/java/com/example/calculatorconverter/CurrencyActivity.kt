@@ -1,27 +1,30 @@
 package com.example.calculatorconverter
 
 import android.app.DatePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.widget.Adapter
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
-import android.widget.Toast
-import com.example.calculatorconverter.network.CurrencyAPIClient
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calculatorconverter.model.Countries
 import com.example.calculatorconverter.model.Currency
 import com.example.calculatorconverter.model.Rates
+import com.example.calculatorconverter.network.CurrencyAPIClient
 import kotlinx.android.synthetic.main.activity_currency.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.System.currentTimeMillis
 import java.util.*
+
 
 class CurrencyActivity : AppCompatActivity() {
 
     var check: Int = 0
 
+    var history: Rates? = null
 
     val hashMap = hashMapOf(
         "AUD" to 0.0,
@@ -87,6 +90,13 @@ class CurrencyActivity : AppCompatActivity() {
                         5 -> textView_currency.text = getResults(output, hashMap["USD"])
                     }
                     //textView_date.visibility = View.VISIBLE
+                    textView_info.visibility = View.VISIBLE
+                    textView_info.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                 }
             }
 
@@ -136,55 +146,72 @@ class CurrencyActivity : AppCompatActivity() {
         })
     }
 
+
     private fun getHistorical(date: String, symbols: String) {
-        val call: Call<Currency> = CurrencyAPIClient.getHistorical(date, symbols)
-        call.enqueue(object : Callback<Currency> {
-            override fun onFailure(call: Call<Currency>, t: Throwable) {
-                t.printStackTrace()
-                Log.e("FAILED HISTORICAL CONN", t.message)
-            }
 
-            override fun onResponse(call: Call<Currency>, response: Response<Currency>) {
-                val response: Currency? = response.body()
-                Log.d("response", "" + response)
+            val call: Call<Currency> = CurrencyAPIClient.getHistorical(date, symbols)
+            call.enqueue(object : Callback<Currency> {
+                override fun onFailure(call: Call<Currency>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("FAILED HISTORICAL CONN", t.message)
+                }
 
-                val history: Rates = response!!.rates
+                override fun onResponse(call: Call<Currency>, response: Response<Currency>) {
+                    val resp: Currency? = response.body()
+                    Log.d("response", "" + response)
+                    history = resp!!.rates
 
-                Log.d("HISTORY TEST", "" + history)
-            }
+                    Log.d("HISTORY TEST", "" + history)
+                }
 
-        })
+            })
+
     }
 
-    fun onClickDataPicker(view: View) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+      fun onClickDataPicker(view: View) {
 
-                val chosenCountry = map[spinner.selectedItemPosition]
-                getHistorical("$year-$monthOfYear-$dayOfMonth", chosenCountry!!)
-                Log.d("Chosen", chosenCountry)
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+            val datePickerDialog = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-//                // Display Selected date in Toast
-//                Toast.makeText(
-//                    this,
-//                    """$dayOfMonth - ${monthOfYear + 1} - $year""",
-//                    Toast.LENGTH_LONG
-//                ).show()
+                    val chosenDatePickerDialog = "$dayOfMonth-${monthOfYear + 1}-$year"
 
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
+                    val formattedDay = if (dayOfMonth%10==dayOfMonth) "0$dayOfMonth" else "$dayOfMonth"
+                    val monthCorrected = monthOfYear + 1
+                    val formattedMonth = if ((monthCorrected)%10==monthCorrected) "0$monthCorrected" else "$monthCorrected"
+                    val formattedDate = "$year-$formattedMonth-$formattedDay"
 
+                    val chosenCountry = map[spinner.selectedItemPosition]
+
+                    getHistorical(formattedDate, chosenCountry!!)
+
+                    val handler = Handler()
+                    handler.postDelayed({
+                        textView_passed.visibility = View.VISIBLE
+                        textView_passed.text = getString(R.string.on_s_rate_was, chosenDatePickerDialog,
+                            history?.getHistoricalRate(chosenCountry)
+                        )
+
+                        textView_current.visibility = View.VISIBLE
+                        textView_current.text = getString(R.string.now_rate_is_s, hashMap[chosenCountry])
+
+                        Log.d("Chosen", chosenCountry)
+                        textView_info.visibility = View.GONE
+                        textView_info.clearAnimation()
+                    }, 1000)
+                },
+                year,
+                month,
+                day
+            )
+            datePickerDialog.datePicker.maxDate = currentTimeMillis()
+            datePickerDialog.show()
     }
 
 
