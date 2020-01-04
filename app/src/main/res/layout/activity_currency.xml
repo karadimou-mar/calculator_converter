@@ -47,6 +47,16 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
 
         <Spinner
             android:id="@+id/spinner"
@@ -66,15 +76,7 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+
 
 
         <TextView

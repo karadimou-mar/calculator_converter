@@ -2,6 +2,7 @@ package com.example.calculatorconverter
 
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,14 +10,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 
 
 class MainActivity : AppCompatActivity() {
 
     var hasError: Boolean = false
-    var lastNumeric: Boolean = false // wether the last input is a number\
+    var lastNumeric: Boolean = false
     var hasClearLast = false
 
 
@@ -27,35 +27,35 @@ class MainActivity : AppCompatActivity() {
         currency.setOnClickListener {
 
             val output = textView_output.text.toString()   //+"\u20AC"
-            val hasOperator: Boolean = output.contains("[-+*/]".toRegex())
+            val hasOperator: Boolean = output.contains(getString(R.string.operatorsRegex).toRegex())
             if (!hasOperator) {
                 val intent = Intent(this, CurrencyActivity::class.java)
                 intent.putExtra("Output", output)
                 startActivity(intent)
-            }else {
-                Toast.makeText(this,"This amount cannot be converted. Try again!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "This amount can't be converted. Try again!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
-
     }
 
     fun onNumberClicked(view: View) {
-        //textView.text = ""
         if (hasError) {
             textView_output.text = (view as Button).text
-            Log.d("XCALCULATOR", "bUTTON PRESSED")
             hasError = false
         } else {
             textView_output.append((view as Button).text)
-            Log.d("YCALCULATOR", "bUTTON PRESSED")
         }
         lastNumeric = true
 
     }
 
     fun onDecimalClicked(view: View) {
-        val list: List<String> = textView_output.text.split("[-+*/]".toRegex())
+        val list: List<String> = textView_output.text.split(getString(R.string.operatorsRegex).toRegex())
         if (!(list.last().contains(".")) && lastNumeric) {
             textView_output.append((view as Button).text)
             lastNumeric = true
