@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object CurrencyAPIClient {
 
-    val BASE_URL = "http://data.fixer.io/api/"
+    private const val BASE_URL = "http://data.fixer.io/api/"
 
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)

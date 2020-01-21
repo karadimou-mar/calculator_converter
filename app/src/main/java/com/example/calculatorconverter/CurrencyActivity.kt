@@ -37,7 +37,8 @@ class CurrencyActivity : AppCompatActivity() {
         "USD" to 0.0
     )
 
-    private val map: Map<Int, String> = mapOf(0 to "AUD", 1 to "CAD", 2 to "CNY", 3 to "GBP", 4 to "JPY", 5 to "USD")
+    private val map: Map<Int, String> =
+        mapOf(0 to "AUD", 1 to "CAD", 2 to "CNY", 3 to "GBP", 4 to "JPY", 5 to "USD")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class CurrencyActivity : AppCompatActivity() {
 
         getRates()
 
-            val actionBar = supportActionBar
+        val actionBar = supportActionBar
         actionBar!!.title = "Currency Activity"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
@@ -66,9 +67,6 @@ class CurrencyActivity : AppCompatActivity() {
                 Countries(R.drawable.usd, "USD")
             )
         )
-
-
-
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 parent?.selectedItemPosition
@@ -96,9 +94,7 @@ class CurrencyActivity : AppCompatActivity() {
 
                 }
             }
-
         }
-
     }
 
 
@@ -203,12 +199,14 @@ class CurrencyActivity : AppCompatActivity() {
                 handler.postDelayed({
                     textView_passed_date.visibility = View.VISIBLE
                     textView_passed_rate.visibility = View.VISIBLE
-                    val input = history?.getHistoricalRate(chosenCountry).toString()+"*"+textView_amount.text
+                    val input =
+                        history?.getHistoricalRate(chosenCountry).toString() + "*" + textView_amount.text
                     val expression = ExpressionBuilder(input).build()
                     //textView_passed.text = expression.evaluate().toString()
                     textView_passed_date.text =
                         getString(
-                        R.string.on_s_rate_was, chosenDatePickerDialog)
+                            R.string.on_s_rate_was, chosenDatePickerDialog
+                        )
                     textView_passed_rate.text = "${expression.evaluate()}"
                 }, 1000)
             },
@@ -216,7 +214,7 @@ class CurrencyActivity : AppCompatActivity() {
             month,
             day
         )
-        datePickerDialog.datePicker.maxDate = currentTimeMillis()-86400000
+        datePickerDialog.datePicker.maxDate = currentTimeMillis() - 86400000
         datePickerDialog.show()
     }
 
@@ -225,7 +223,6 @@ class CurrencyActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 }
 
 
